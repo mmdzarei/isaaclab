@@ -22,7 +22,12 @@ from isaaclab.scene import InteractiveSceneCfg
 from isaaclab.sim import SimulationCfg
 from isaaclab.terrains import TerrainImporterCfg
 from isaaclab.utils import configclass
-from isaaclab.utils.assets import ISAAC_NUCLEUS_DIR
+from isaaclab.utils.assets import ISAAC_NUCLEUS_DIR, NUCLEUS_ASSET_ROOT_DIR, NVIDIA_NUCLEUS_DIR, ISAACLAB_NUCLEUS_DIR
+for i in range(10):
+    print(f"\033[31mISSAC_NUCLEUS_DIR: {ISAAC_NUCLEUS_DIR}\033[0m")
+    print(f"\033[31mNUCLEUS_ASSET_ROOT_DIR: {NUCLEUS_ASSET_ROOT_DIR}\033[0m")
+    print(f"\033[31mNVIDIA_NUCLEUS_DIR: {NVIDIA_NUCLEUS_DIR}\033[0m")
+    print(f"\033[31mISAACLAB_NUCLEUS_DIR: {ISAACLAB_NUCLEUS_DIR}\033[0m")
 from isaaclab.utils.math import sample_uniform , quat_mul, quat_from_euler_xyz, euler_xyz_from_quat
 from isaaclab_assets import franka
 
@@ -41,6 +46,7 @@ from isaaclab.actuators import ActuatorBase, IdealPDActuatorCfg, ImplicitActuato
 import isaacsim.core.utils.numpy.rotations as rot_utils
 import numpy as np
 import gym
+
 
 @configclass
 class FrankaCameraReachEnvCfg(DirectRLEnvCfg):
@@ -71,7 +77,8 @@ class FrankaCameraReachEnvCfg(DirectRLEnvCfg):
     robot = ArticulationCfg(
         prim_path="/World/envs/env_.*/Robot",
         spawn=sim_utils.UsdFileCfg(
-            usd_path= f"{ISAAC_NUCLEUS_DIR}/Robots/Franka/franka_instanceable.usd",
+            usd_path=f"{ISAACLAB_NUCLEUS_DIR}/Robots/FrankaEmika/panda_instanceable.usd",
+            # usd_path= f"/Isaac/Robots/FrankaRobotics/FrankaPanda/franka.usd",
             # usd_path= f"{ISAAC_NUCLEUS_DIR}/Robots/UniversalRobots/UR10/ur10_instanceable.usd",
             # usd_path= f"{ISAAC_NUCLEUS_DIR}/Robots/Kinova/Gen3/gen3n7_instanceable.usd",
             activate_contact_sensors=True,
@@ -233,11 +240,13 @@ class FrankaCameraReachEnvCfg(DirectRLEnvCfg):
     door = RigidObjectCfg(
         prim_path="/World/envs/env_.*/door",
         spawn=sim_utils.UsdFileCfg(
-            usd_path=f"/root/Documents/door_green6.usd",
+            # usd_path=f"/root/Documents/door_green6.usd",
+            usd_path=f"/root/Downloads/door_green6.usd",
+            # usd_path=f"/root/Downloads/door.usd",
             rigid_props=sim_utils.RigidBodyPropertiesCfg(
                 disable_gravity=True, 
             ),
-            activate_contact_sensors=True,
+            # activate_contact_sensors=True,
 
         ),
         
